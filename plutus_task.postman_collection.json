@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "90499e45-e5de-426f-b987-ff485448e30d",
+		"name": "plutus_task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "customer1",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "customer1@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Cus@1234",
+							"type": "text"
+						},
+						{
+							"key": "profile_photo",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						},
+						{
+							"key": "date_of_birth",
+							"value": "2023-01-04",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/accounts/registration/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"accounts",
+						"registration",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"token = pm.response.json()[\"token\"]",
+							"",
+							"pm.environment.set(\"token\", token);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"customer1\",\n    \"password\": \"Cus@12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/accounts/login/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"accounts",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/accounts/logout/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"accounts",
+						"logout",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reset_password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"customer1@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/accounts/password_reset/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"accounts",
+						"password_reset",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "password_reset_confirm",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"c087931ea395e\",\n    \"password\": \"Cus@12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/accounts/password_reset/confirm/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"accounts",
+						"password_reset",
+						"confirm",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_customer",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "gender",
+							"value": "female",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "customer1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "customer1@gmail.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "phone_number",
+							"value": "+919900000002",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "profile_photo",
+							"type": "file",
+							"src": "/home/vishvajeet/Pictures/Screenshot from 2022-12-31 16-12-00.png"
+						},
+						{
+							"key": "date_of_birth",
+							"value": "2023-01-05",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/accounts/5/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"accounts",
+						"5",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
