@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # third party apps
+    'django_extensions',
     'rest_framework',
-    "rest_framework.authtoken",
-    # 'knox',
+    'rest_framework.authtoken',
     'phonenumber_field',
     'django_rest_passwordreset',
 

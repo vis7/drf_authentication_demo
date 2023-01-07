@@ -13,6 +13,11 @@ Added api for below features.
 - date_of_birth can not be a future date
 
 # to do
-- add fixtures
-- add other userfull tools - (swagger, django_extentions, isort, linter etc.)
-- add unit tests for main functionalities (using pytest, or drf testing tools)
+- [ ] Add fixtures
+- [ ] Add other userfull tools - (swagger, django_extentions, isort, linter etc.)
+- [X] Add unit tests for main functionalities
+
+# tests
+- Register and login
+- Change profile - bd in future not allowed, 
+- Change profile - pic more then 2 MB not allowed
