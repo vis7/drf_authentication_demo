@@ -9,7 +9,7 @@ from .models import Customer
 client = APIClient()
 
 class AccountTests(APITestCase):
-    def test_create_and_login(self):
+    def test_registration_and_login(self):
         """
         testcase to test registration and login functionlity
         """

@@ -12,7 +12,6 @@ class CustomerSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         # check if email user with this email exist then redirect to login
-        print(validated_data)
         user = Customer.objects.create(**validated_data)
         password = self.validated_data["password"]
         user.set_password(password)

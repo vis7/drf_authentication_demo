@@ -45,28 +45,21 @@ class LoginAPI(generics.GenericAPIView):
         request_body = json.loads(request.body)
         username = request_body['username']
         password = request_body['password']
-        try:
-            user = Customer.objects.get(username=username)
-        except BaseException as e:
-            return Response({"message":"Invalid username"}, status=status.HTTP_400_BAD_REQUEST)
 
+        user = get_object_or_404(Customer, username=username)
         token = Token.objects.get_or_create(user=user)[0].key
-        print(token)
+
         if not check_password(password, user.password):
             return Response({"message": "Incorrect login credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
-        if user:
-            if user.is_active:
-                print(request.user)
-                login(request, user)
-                data["message"] = "user logged in"
-                data["email_address"] = user.email
-                response = {"data": data, "token": token}
-                return Response(response)
-            else:
-                return Response({"message":"Account not active"}, status=status.HTTP_400_BAD_REQUEST)
+        if user and user.is_active:
+            login(request, user)
+            data["message"] = "user logged in"
+            data["email_address"] = user.email
+            response = {"data": data, "token": token}
+            return Response(response, status=status.HTTP_200_OK)
         else:
-            return Response({"message":"Account doesn't exist"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message":"Account doesn't exist or not active"}, status=status.HTTP_400_BAD_REQUEST)
 
 class LogoutAPI(APIView):
     authentication_classes = [authentication.TokenAuthentication]
